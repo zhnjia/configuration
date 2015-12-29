@@ -1,0 +1,21 @@
+f () {
+    local res=~/.findr
+    find . -name $@ | tee $res
+    local lines=$(cat $res | wc -l)
+    if [ $lines -eq 1 ];then
+        echo -n "  [Only one! \"e\"-> vi, \"q\"-> quit, \"d\"-> del] : "
+        read -k 1 cmd
+        echo ""
+        case $cmd in
+            "q")
+                return
+                ;;
+            "e")
+                vi $(cat $res)
+                ;;
+            "d")
+                rm $(cat $res)
+                ;;
+        esac
+    fi
+}

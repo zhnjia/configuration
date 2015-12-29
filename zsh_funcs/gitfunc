@@ -1,0 +1,26 @@
+# git functions
+gitfunc () {
+    cmds=$(getopt -o k:g:a -- "$@")
+    if [ $? -ne 0 ]; then return 1; fi
+    eval set -- $cmds
+
+    while true; do
+        case $1 in
+            -k)
+                gitk -1000 $2 &
+                return
+                ;;
+            -g)
+                git grep -n $2
+                return
+                ;;
+            -a)
+                git status -s | awk '{print $2}' | xargs git add
+                return
+                ;;
+            --)
+                break
+                ;;
+        esac
+    done
+}

@@ -1,0 +1,35 @@
+# adb functions
+adbfunc () {
+    cmds=$(getopt -o g:e:csit -- "$@")
+    if [ $? -ne 0 ]; then return 1; fi
+    eval set -- "$cmds"
+
+    while true; do
+        case $1 in
+            -c)
+                adb logcat -c
+                return
+                ;;
+            -e)
+                adb logcat -v time | egrep $2
+                return
+                ;;
+            -s)
+                adb logcat -v time -s $2
+                return
+                ;;
+            -g)
+                adb logcat -v time | grep $2
+                return
+                ;;
+            -t)
+                adb shell /data/data/tcpdump -p -vv -s 0 -i any -w /sdcard/capture.pcap
+                return
+                ;;
+            --)
+                adb logcat -v time
+                return
+                ;;
+        esac
+    done
+}

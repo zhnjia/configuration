@@ -1,0 +1,81 @@
+# -+-sh-*-
+usage () {
+    cat <<EOF
+$0 [-c <cmd>] [-b <url>]  [-u] [-r] [-s <server>] [-p] [--srv]
+
+example:
+    $0 -c "FEATURES 6254"
+
+OPTIONS
+    -c turbo cmds, IMAGE|FEATURES|MAIN
+    -b explorer url
+    -u uninstall turbo demo
+    -r pm clear turbo
+    -s suggests turbo server, restart
+    -p turbo.proxy
+    -v show detials
+
+    --srv show turbo server
+
+EOF
+}
+
+browse () {
+    adb shell am start -n com.oupeng.android.turboexample/com.oupeng.android.turboexample.MainActivity -d url-"$1"
+}
+
+turbo_cmd () {
+    local connect="CONNECT opera:control HTTP/1.0\r\n\r\n"
+    echo ${connect}${1}"\r\n" | nc localhost 9090
+}
+
+uninstall () {
+    adb uninstall com.oupeng.android.turboexample
+}
+
+pm_clear () {
+    adb shell pm clear com.oupeng.android.turboexample
+}
+
+suggest_server () {
+    local turbo_server=$1
+    adb shell "echo \"${turbo_server}\" > /data/local/tmp/turboproxy"
+}
+
+show_suggest_server () {
+    echo "\$ "$(adb shell "cat /data/local/tmp/turboproxy")
+}
+
+turbo_proxy () {
+    browse "http://turbo.proxy"
+}
+
+tb () {
+    cmds=$(getopt -o c:b:s:purh -l srv -- "$@")
+    if [ $? -ne 0 ]; then usage; return 1; fi
+    eval set -- "$cmds"
+
+    while true; do
+        case $1 in
+            -b) browse $2; shift 2
+                ;;
+            -c) turbo_cmd $2; shift 2
+                ;;
+            -u) uninstall; shift 1
+                ;;
+            -r) pm_clear; shift 1
+                ;;
+            -s) suggest_server $2; shift 2
+                ;;
+            --srv)
+                show_suggest_server; shift 1
+                ;;
+            -p) turbo_proxy; shift 1
+                ;;
+            -h) usage; shift 1
+                ;;
+            --) break
+                ;;
+        esac
+    done
+}

@@ -1,0 +1,10 @@
+vimFile () {
+    echo $@ | awk -F\: '{print $1}'
+}
+vimLine () {
+    echo $@ | awk -F\: '{print $2}'
+}
+
+vl () {
+    vim $(vimFile $@) $([[ -z $(vimLine $@) ]] && echo "" || echo "+")$(vimLine $@)
+}
