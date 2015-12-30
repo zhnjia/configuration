@@ -81,9 +81,9 @@ alias adbt="adbfunc -t"
 
 # git fun
 autoload -Uz gitfunc
-alias gk="gitfun -k"
-alias gg="gitfun -g"
-alias gadd="gitfun -a"
+alias gk="gitfunc -k"
+alias gg="gitfunc -g"
+alias gadd="gitfunc -a"
 
 # emacs
 alias em="noglob emacs_cmd"
