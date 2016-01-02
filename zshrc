@@ -55,7 +55,7 @@ PROJECT_PATHS=(~/workspace/ ~/training/)
 
 set -o emacs
 
-eval `dircolors ~/soft_make/dircolors-solarized-master/dircolors.ansi-universal`
+#eval `dircolors ~/soft_make/dircolors-solarized-master/dircolors.ansi-universal`
 
 # Customize to your needs...
 export CONFIG_PATH=$PATH:/home/jiazhang/bin:/usr/local/bin:/usr/bin:/bin:/usr/games
