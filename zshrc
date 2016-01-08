@@ -55,13 +55,10 @@ PROJECT_PATHS=(~/workspace/ ~/training/)
 
 set -o emacs
 
-#eval `dircolors ~/soft_make/dircolors-solarized-master/dircolors.ansi-universal`
-
 # Customize to your needs...
 export CONFIG_PATH=$PATH:/home/jiazhang/bin:/usr/local/bin:/usr/bin:/bin:/usr/games
 
 export CCACHE_DIR=/mnt/temp/CCACHE
-
 export CCACHE_COMPILERCHECK=content
 export COMPONENT_BUILD=NO
 export ICECC=YES ICECC_PREFIX=$HOME/pkg/icecc
@@ -97,3 +94,5 @@ emacs_cmd () {
 #}
 
 [ -e ~/.zshrc_local ] && source ~/.zshrc_local
+
+eval $(dircolors ~/configuration/dircolors-solarized/dircolors.ansi-universal)
