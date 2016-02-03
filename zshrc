@@ -43,7 +43,7 @@ ZSH_THEME="robbyrussell"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git autojump sudo colored-man colorize cp history pj adb ant encode64 extract zsh-syntax-highlighting history-substring-search urltools debian)
+plugins=(git autojump sudo colored-man emacs colorize cp history pj adb ant encode64 extract zsh-syntax-highlighting history-substring-search urltools debian python)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -88,10 +88,12 @@ emacs_cmd () {
     emacs $@ 2> /dev/null &
 }
 
-#alias ec="noglob emacsclient_gui"
-#emacsclient_gui () {
-#    emacsclient -c $@ &
-#}
+alias ec="noglob emacsclient_gui"
+emacsclient_gui () {
+    emacsclient -c $@ &
+}
+
+alias et="emacsclient -t"
 
 [ -e ~/.zshrc_local ] && source ~/.zshrc_local
 
