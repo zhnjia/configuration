@@ -50,9 +50,6 @@ source $ZSH/oh-my-zsh.sh
 fpath=( ~/.zsh_funcs "${fpath[@]}" )
 autoload -Uz f vl ws tb
 
-# enable plugins "pj"
-PROJECT_PATHS=(~/workspace/ ~/training/)
-
 set -o emacs
 
 # Customize to your needs...
