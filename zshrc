@@ -55,11 +55,6 @@ set -o emacs
 # Customize to your needs...
 export CONFIG_PATH=$PATH:/home/jiazhang/bin:/usr/local/bin:/usr/bin:/bin:/usr/games
 
-export CCACHE_DIR=/mnt/temp/CCACHE
-export CCACHE_COMPILERCHECK=content
-export COMPONENT_BUILD=NO
-export ICECC=YES ICECC_PREFIX=$HOME/pkg/icecc
-
 # bindkey -v
 bindkey "\eA" history-substring-search-up
 bindkey "\eB" history-substring-search-down
