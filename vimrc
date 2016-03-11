@@ -17,7 +17,7 @@ Plugin 'vim-scripts/a.vim'
 Plugin 'rking/ag.vim'
 Plugin 'vim-scripts/gtags.vim'
 Plugin 'scrooloose/syntastic'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'SirVer/ultisnips'
@@ -166,7 +166,7 @@ map <silent> <F4> :NERDTreeToggle<CR>
 let g:NERDTreeWinPos="right"
 let NERDTreeIgnore=['tags', 'cscope.in.out', 'cscope.files', 'cscope.out', 'cscope.po.out', 'GTAGS', 'GRTAGS', 'GPATH']
 
-autocmd BufEnter *.* if &modifiable | NERDTreeFind | wincmd p | endif
+"autocmd BufEnter *.* if &modifiable | NERDTreeFind | wincmd p | endif
 
 "**********************************************************************************
 "CtrlP"
@@ -232,9 +232,9 @@ let g:Powerline_mode_cs = 'S-B'
 let loaded_matchit = 1
 
 "YouCompleteMe
-let g:ycm_key_invoke_completion = '<C-S-Space>'
-let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
+"let g:ycm_key_invoke_completion = '<C-S-Space>'
+"let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
+"let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
 
 " syntastic
 let g:syntastic_check_on_open = 0

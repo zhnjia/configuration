@@ -15,7 +15,8 @@ OPTIONS
     -p turbo.proxy
     -v show detials
 
-    --srv show turbo server
+    --sv show turbo server
+    --sc clear turbo server
 
 EOF
 }
@@ -46,12 +47,16 @@ show_suggest_server () {
     echo "\$ "$(adb shell "cat /data/local/tmp/turboproxy")
 }
 
+clear_suggest_server () {
+    adb shell "rm /data/local/tmp/turboproxy"
+}
+
 turbo_proxy () {
     browse "http://turbo.proxy"
 }
 
 tb () {
-    cmds=$(getopt -o c:b:s:purh -l srv -- "$@")
+    cmds=$(getopt -o c:b:s:purh -l sv,sc -- "$@")
     if [ $? -ne 0 ]; then usage; return 1; fi
     eval set -- "$cmds"
 
@@ -67,8 +72,11 @@ tb () {
                 ;;
             -s) suggest_server $2; shift 2
                 ;;
-            --srv)
+            --sv)
                 show_suggest_server; shift 1
+                ;;
+            --sc)
+                clear_suggest_server; shift 1
                 ;;
             -p) turbo_proxy; shift 1
                 ;;
