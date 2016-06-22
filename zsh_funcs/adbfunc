@@ -1,6 +1,16 @@
 # adb functions
+usedevice () {
+  devices=$(adb devices -l | grep model | awk '{print $1,$5}')
+  models=$(echo $devices | awk -F':' '{print $2}')
+  echo $models | awk 'BEGIN {print "List of devices attached"} { printf("  %d. %s\n",NR,$1) }'
+  echo -n "which devices do you want? "
+  read device
+  export ANDROID_SERIAL=$(echo $devices | awk -v dev=$device '{ if (NR == dev) {print $1}}')
+  echo "!!! Directs command to ["$(echo $models | awk -v dev=$device '{if (NR == dev) {print $1}}')"] !!!"
+}
+
 adbfunc () {
-    cmds=$(getopt -o g:e:csit -- "$@")
+    cmds=$(getopt -o e:g:s:cdt -- "$@")
     if [ $? -ne 0 ]; then return 1; fi
     eval set -- "$cmds"
 
@@ -24,6 +34,10 @@ adbfunc () {
                 ;;
             -t)
                 adb shell /data/data/tcpdump -p -vv -s 0 -i any -w /sdcard/capture.pcap
+                return
+                ;;
+            -d)
+                usedevice
                 return
                 ;;
             --)

@@ -67,6 +67,7 @@ alias alg="adbfunc -g"
 alias alsg="adbfunc -s"
 alias aleg="adbfunc -e"
 alias adbt="adbfunc -t"
+alias devices="adbfunc -d"
 
 # git fun
 autoload -Uz gitfunc

@@ -277,4 +277,4 @@ let g:CommandTMaxFiles = 1000000
 let g:CommandTMaxDepth = 40
 let g:CommandTSmartCase = 1
 
-map <C-x><C-c> :wqa<CR>
+map <C-x><C-s> :wqa<CR>
