@@ -1,3 +1,5 @@
+# -*- mode: shell-script; -*-
+
 # git functions
 gitfunc () {
     cmds=$(getopt -o k:g:a -- "$@")

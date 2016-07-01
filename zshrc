@@ -1,3 +1,4 @@
+# -*- Mode: shell-script; tab-width: 2; indent-tabs-mode: nil; -*-
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 

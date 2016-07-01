@@ -1,4 +1,5 @@
-# -+-sh-*-
+# -*- mode:shell-script; -*-
+# ex: filetype=sh
 usage () {
     cat <<EOF
 $0 [-c <cmd>] [-b <url>]  [-u] [-r] [-s <server>] [-p] [--srv]
