@@ -48,10 +48,11 @@ plugins=(git autojump sudo colored-man emacs colorize cp history pj adb ant enco
 
 source $ZSH/oh-my-zsh.sh
 
-fpath=( ~/.zsh_funcs "${fpath[@]}" )
-autoload -Uz f vl ws tb
-
 set -o emacs
+set -o KSH_AUTOLOAD
+
+fpath=( ~/.zsh_funcs $fpath )
+autoload f vl ws tb
 
 # Customize to your needs...
 export CONFIG_PATH=$PATH:/home/jiazhang/bin:/usr/local/bin:/usr/bin:/bin:/usr/games
