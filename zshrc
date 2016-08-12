@@ -90,6 +90,26 @@ emacsclient_gui () {
 
 alias et="emacsclient -t"
 
+# shortcut
+alias -s xlsx="libreoffice --calc"
+alias -s xls="libreoffice --calc"
+alias -s jpg="eog"
+alias -s png="eog"
+alias -s pdf="evince"
+alias -s html="opera"
+alias -s htm="opera"
+
+alias -s xml="et"
+alias -s el="et"
+alias -s java="et"
+alias -s cc="et"
+alias -s h="et"
+alias -s cpp="et"
+alias -s py="et"
+alias -s sh="et"
+alias -s js="et"
+
+
 [ -e ~/.zshrc_local ] && source ~/.zshrc_local
 
 eval $(dircolors ~/configuration/dircolors-solarized/dircolors.ansi-universal)
