@@ -44,7 +44,14 @@ ZSH_THEME="robbyrussell"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git autojump sudo colored-man emacs colorize cp history pj adb ant encode64 extract zsh-syntax-highlighting history-substring-search urltools debian python)
+plugins=(git autojump sudo colored-man emacs colorize cp history adb ant encode64 extract zsh-syntax-highlighting zsh-autosuggestions zsh-history-substring-search urltools debian python)
+
+autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+
+[[ -n "${key[Up]}"   ]] && bindkey "${key[Up]}"   up-line-or-beginning-search
+[[ -n "${key[Down]}" ]] && bindkey "${key[Down]}" down-line-or-beginning-search
 
 source $ZSH/oh-my-zsh.sh
 
@@ -58,8 +65,8 @@ autoload f vl ws tb
 export CONFIG_PATH=$PATH:/home/jiazhang/bin:/usr/local/bin:/usr/bin:/bin:/usr/games
 
 # bindkey -v
-bindkey "\eA" history-substring-search-up
-bindkey "\eB" history-substring-search-down
+bindkey -M emacs "^P" history-substring-search-up
+bindkey -M emacs "^N" history-substring-search-down
 
 # adb functions
 autoload -Uz adbfunc
