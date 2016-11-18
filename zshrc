@@ -65,8 +65,8 @@ autoload f vl ws tb
 export CONFIG_PATH=$PATH:/home/jiazhang/bin:/usr/local/bin:/usr/bin:/bin:/usr/games
 
 # bindkey -v
-bindkey -M emacs "^P" history-substring-search-up
-bindkey -M emacs "^N" history-substring-search-down
+# bindkey -M emacs "^P" history-substring-search-up
+# bindkey -M emacs "^N" history-substring-search-down
 
 # adb functions
 autoload -Uz adbfunc
