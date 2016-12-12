@@ -47,7 +47,7 @@ ZSH_THEME="robbyrussell"
 plugins=(git autojump sudo colored-man emacs colorize cp history adb ant encode64 extract zsh-syntax-highlighting zsh-autosuggestions zsh-history-substring-search urltools zsh-256color debian python)
 
 # zsh-autosuggestions
-bindkey '^N' autosuggest-execute
+bindkey '^G' autosuggest-execute
 
 autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
 zle -N up-line-or-beginning-search
