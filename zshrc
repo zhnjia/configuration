@@ -9,7 +9,7 @@ ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="robbyrussell"
 #ZSH_THEME="intheloop"
 #ZSH_THEME="pygmalion"
-#ZSH_THEME="avit"
+#ZSH_THEME="sammy"
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -45,6 +45,9 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git autojump sudo colored-man emacs colorize cp history adb ant encode64 extract zsh-syntax-highlighting zsh-autosuggestions zsh-history-substring-search urltools zsh-256color debian python)
+
+# zsh-autosuggestions
+bindkey '^N' autosuggest-execute
 
 autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
 zle -N up-line-or-beginning-search
