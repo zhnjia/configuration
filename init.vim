@@ -81,12 +81,13 @@ let g:fzf_buffers_jump = 2
 
 " key map
 nmap <leader>F :FZF<CR>
-nmap <leader>f :FZF %:p:h
+nmap <leader>f :FZF %:p:h<CR>
 nmap <leader>A :Ag<SPACE>
 nmap <leader>B :Buffers<CR>
 nmap <leader>E :Ex<CR>
 nmap <leader>S :Lines<CR>
 nmap <leader>W :Windows<CR>
+nmap <F3> :Ag <C-R>=expand("<cword>")<CR><CR>
 
 " ===== Tagbar =====
 nmap <leader>T :TagbarOpenAutoClose<CR>
