@@ -47,8 +47,16 @@ imap <C-e> <ESC>$A
 let mapleader=","
 
 " ==================== fzf configuration ====================
+" An action can be a reference to a function that processes selected lines
+function! s:build_quickfix_list(lines)
+  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+  copen
+  cc
+endfunction
+
 " This is the default extra key bindings
 let g:fzf_action = {
+  \ 'ctrl-q': function('s:build_quickfix_list'),
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
@@ -58,8 +66,9 @@ let g:fzf_action = {
 let g:fzf_layout = { 'down': '~40%' }
 
 " In Neovim, you can set up fzf window using a Vim command
-let g:fzf_layout = { 'window': 'enew' }
-let g:fzf_layout = { 'window': '-tabnew' }
+" let g:fzf_layout = { 'window': 'enew' }
+" let g:fzf_layout = { 'window': '-tabnew' }
+" let g:fzf_layout = { 'window': '10split enew' }
 
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
@@ -80,14 +89,19 @@ let g:fzf_colors =
 let g:fzf_buffers_jump = 2
 
 " key map
+nmap <leader>H :History<CR>
+nmap <leader>G :GFiles<CR>
 nmap <leader>F :FZF<CR>
 nmap <leader>f :FZF %:p:h<CR>
 nmap <leader>A :Ag<SPACE>
 nmap <leader>B :Buffers<CR>
 nmap <leader>E :Ex<CR>
-nmap <leader>S :Lines<CR>
+nmap <leader>S :BLines<CR>
 nmap <leader>W :Windows<CR>
 nmap <F3> :Ag <C-R>=expand("<cword>")<CR><CR>
+
+" ultisnips
+let g:UltiSnipsExpandTrigger="<c-j>"
 
 " ===== Tagbar =====
 nmap <leader>T :TagbarOpenAutoClose<CR>
