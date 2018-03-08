@@ -18,6 +18,10 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
 Plug 'liuchengxu/space-vim-dark'
+Plug 'scrooloose/nerdcommenter'
+Plug 'tomasr/molokai'
+Plug 'altercation/vim-colors-solarized'
+Plug 'tpope/vim-vividchalk'
 call plug#end()
 
 " ==================== Basic configuration ====================
@@ -37,7 +41,7 @@ set ignorecase
 set hidden
 syntax on
 " color dracula
-color space-vim-dark
+color molokai
 
 nmap j gj
 nmap k gk
@@ -106,3 +110,18 @@ let g:UltiSnipsExpandTrigger="<c-j>"
 " ===== Tagbar =====
 nmap <leader>T :TagbarOpenAutoClose<CR>
 let g:tagbar_vertical = 20
+
+" ===== NERDComment =====
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+

@@ -53,7 +53,7 @@ adbfunc () {
                 return
                 ;;
             -t)
-                adb shell /data/data/tcpdump -p -vv -s 0 -i any -w /sdcard/capture.pcap
+                adb shell /data/data/tcpdump -p -vv -s 0 -i any -w /sdcard/capture.pcap -W 1
                 return
                 ;;
             -d)
