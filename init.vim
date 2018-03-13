@@ -20,7 +20,8 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'liuchengxu/space-vim-dark'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tomasr/molokai'
-Plug 'altercation/vim-colors-solarized'
+"Plug 'altercation/vim-colors-solarized'
+Plug 'lifepillar/vim-solarized8'
 Plug 'tpope/vim-vividchalk'
 call plug#end()
 
@@ -41,7 +42,7 @@ set ignorecase
 set hidden
 syntax on
 " color dracula
-color molokai
+color solarized8_dark_high
 
 nmap j gj
 nmap k gk
