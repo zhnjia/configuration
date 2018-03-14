@@ -23,6 +23,7 @@ Plug 'tomasr/molokai'
 "Plug 'altercation/vim-colors-solarized'
 Plug 'lifepillar/vim-solarized8'
 Plug 'tpope/vim-vividchalk'
+Plug 'vim-scripts/a.vim'
 call plug#end()
 
 " ==================== Basic configuration ====================
@@ -40,6 +41,7 @@ set cursorline
 set background=dark
 set ignorecase
 set hidden
+set tags=./tags
 syntax on
 " color dracula
 color solarized8_dark_high
@@ -102,6 +104,7 @@ nmap <leader>A :Ag<SPACE>
 nmap <leader>B :Buffers<CR>
 nmap <leader>E :Ex<CR>
 nmap <leader>S :BLines<CR>
+nmap <C-S>     :BLines<CR>
 nmap <leader>W :Windows<CR>
 nmap <F3> :Ag <C-R>=expand("<cword>")<CR><CR>
 
