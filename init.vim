@@ -107,6 +107,7 @@ nmap <leader>S :BLines<CR>
 nmap <C-S>     :BLines<CR>
 nmap <leader>W :Windows<CR>
 nmap <F3> :Ag <C-R>=expand("<cword>")<CR><CR>
+nmap <C-x>g    :Gstatus<CR>
 
 " ultisnips
 let g:UltiSnipsExpandTrigger="<c-j>"
@@ -129,3 +130,5 @@ let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
 
+" ===== auto trim empty space line =====
+autocmd BufWritePre * :%s/\s\+$//e

@@ -9,24 +9,24 @@ usedevice () {
   models=$(echo $devices | awk -F':' '{print $2}')
   echo $devices | awk -v selected=$current -F':' 'BEGIN { print "List of devices attached" } { format="  %d.  %s\n"; if (length(selected) > 0 && match($1, selected) == 1) {format="  %d. [%s]\n" }; printf(format,NR,$2) }'
   echo -n "which devices do you want? "
-  read
-  if [[ -z "$REPLY" ]];then
-    return 0
+  read SEL
+  if [[ -z "$SEL" ]];then
+      SEL=1
   fi
 
-  if [[ ! "$REPLY" =~ "[0-9]+" ]];then
+  if [[ ! "$SEL" =~ "[0-9]+" ]];then
     echo "  Not a digit!"
     return 1
   fi
 
-  local serial=$(echo $devices | awk -v dev=$REPLY '{ if (NR == dev) {print $1}}')
+  local serial=$(echo $devices | awk -v dev=$SEL '{ if (NR == dev) {print $1}}')
   if [[ -z "$serial" ]];then
     echo "  Out of range!"
     return 2
   fi
 
   export ANDROID_SERIAL=$serial
-  echo "  !!! Directs command to [$fg_bold[red]"$(echo $models | awk -v dev=$REPLY '{if (NR == dev) {print $1}}')"$reset_color] !!!"
+  echo "  !!! Directs command to [$fg_bold[red]"$(echo $models | awk -v dev=$SEL '{if (NR == dev) {print $1}}')"$reset_color] !!!"
 }
 
 adbfunc () {

@@ -2,14 +2,14 @@
 
 # git functions
 gitfunc () {
-    cmds=$(getopt -o k:g:a -- "$@")
+    cmds=$(getopt -o k::g:a -- "$@")
     if [ $? -ne 0 ]; then return 1; fi
     eval set -- $cmds
 
     while true; do
         case $1 in
             -k)
-                gitk -1000 $2 &
+                gitk -1000 ${2:-$(git rev-parse --abbrev-ref HEAD)} &
                 return
                 ;;
             -g)
@@ -24,5 +24,7 @@ gitfunc () {
                 break
                 ;;
         esac
+        shift
     done
 }
+

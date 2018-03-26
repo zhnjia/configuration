@@ -83,7 +83,10 @@ alias devices="adbfunc -d"
 
 # git fun
 autoload -Uz gitfunc
-alias gk="gitfunc -k"
+gitkit () {
+    gitfunc -k${1}
+}
+alias gk="gitkit"
 alias gg="gitfunc -g"
 alias gadd="gitfunc -a"
 
