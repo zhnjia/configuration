@@ -7,7 +7,7 @@ ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 ZSH_THEME="robbyrussell"
-#ZSH_THEME="intheloop"
+#ZSH_THEME="candy"
 #ZSH_THEME="pygmalion"
 #ZSH_THEME="refined"
 
@@ -41,13 +41,17 @@ ZSH_THEME="robbyrussell"
 # much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
+
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git autojump sudo colored-man emacs colorize cp history adb ant encode64 extract zsh-syntax-highlighting zsh-autosuggestions urltools zsh-256color python)
+plugins=(git autojump sudo colored-man emacs colorize cp history adb ant encode64 extract zsh-syntax-highlighting zsh-256color zsh-autosuggestions urltools python)
+
 
 # zsh-autosuggestions
-bindkey '^G' autosuggest-execute
+# bindkey '^G' autosuggest-execute
+#
+#export TERM="xterm-256color"
 
 autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
 zle -N up-line-or-beginning-search
@@ -90,8 +94,14 @@ alias gk="gitkit"
 alias gg="gitfunc -g"
 alias gadd="gitfunc -a"
 
-eval $(dircolors ~/config/dircolors-solarized/dircolors.ansi-universal)
+#eval $(dircolors ~/config/dircolors-solarized/dircolors.ansi-universal)
 
 [ -e ~/.zshrc_local ] && source ~/.zshrc_local
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+#export ZSH_AUTOSUGGEST_HIGHLIGHT_COLOR="fg=8"
+export TERM="xterm-256color"
+
+alias ping="ping -c 5"
+alias ipe="curl ipinfo.io/ip"

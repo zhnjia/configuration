@@ -5,6 +5,8 @@ if [[ ! -d ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]];then
     git clone git://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 fi
 
+git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+
 # zsh profile
 [ -f ~/.zshrc ] && mv ~/.zshrc ~/.zshrc_$(date +%Y%m%d%H%M)
 ln -s ~/configuration/zshrc ~/.zshrc
