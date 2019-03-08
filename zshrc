@@ -63,7 +63,7 @@ zle -N down-line-or-beginning-search
 source $ZSH/oh-my-zsh.sh
 
 set -o emacs
-set -o KSH_AUTOLOAD
+#set -o KSH_AUTOLOAD
 
 fpath=( ~/.zsh_funcs $fpath )
 autoload f vl ws tb
