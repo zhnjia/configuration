@@ -10,9 +10,11 @@ Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'Valloric/YouCompleteMe'
 Plug 'dracula/vim'
-" Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'jreybert/vimagit'
 Plug 'tpope/vim-fugitive'
+Plug 'jreybert/vimagit'
 Plug 'tpope/vim-surround'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -26,6 +28,7 @@ Plug 'tpope/vim-vividchalk'
 Plug 'vim-scripts/a.vim'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-easytags'
+Plug 'udalov/kotlin-vim'
 call plug#end()
 
 " ==================== Basic configuration ====================
@@ -154,3 +157,6 @@ autocmd BufWritePre * :%s/\s\+$//e
 
 " let g:python_host_prog='/usr/bin/python'
 " let g:python3_host_prog='/usr/bin/python3'
+
+" ===== air-line =====
+let g:airline#extensions#vimagit#enabled = 1
