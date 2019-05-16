@@ -26,13 +26,14 @@ Plug 'tomasr/molokai'
 Plug 'lifepillar/vim-solarized8'
 Plug 'tpope/vim-vividchalk'
 Plug 'vim-scripts/a.vim'
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-easytags'
+" Plug 'xolox/vim-misc'
+" Plug 'xolox/vim-easytags'
 Plug 'udalov/kotlin-vim'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
 call plug#end()
 
-" ==================== Basic configuration ====================
-set number
+" =================== Basic configuration ====================
+" set number
 set expandtab
 set showmatch
 set scrolloff=3
@@ -60,6 +61,10 @@ imap <C-f> <Right>
 imap <C-e> <ESC>$A
 
 let mapleader=","
+
+" ==== relative number ====
+set number relativenumber
+
 
 " ==================== fzf configuration ====================
 " An action can be a reference to a function that processes selected lines
@@ -146,6 +151,10 @@ command! -bang -nargs=? -complete=dir Files
 
 " command! -bang -nargs=+ -complete=dir Ag call fzf#vim#ag_raw(<q-args>, <bang>0)
 
+command! -nargs=* -complete=dir Cd call fzf#run(fzf#wrap(
+  \ {'source': 'find '.(empty(<f-args>) ? '.' : <f-args>).' -type d',
+  \  'sink': 'cd'}))
+
 " key map
 nmap <leader>H :History<CR>
 nmap <leader>G :GFiles<CR>
@@ -155,7 +164,7 @@ nmap <leader>c :GGrep <C-R>=expand("<cword>")<CR><CR>
 nmap <leader>F :Files<CR>
 " nmap <leader>f :FZF %:p:h<CR>
 nmap <leader>f :Files %:p:h<CR>
-nmap <leader>A :Ag<SPACE>
+nmap <leader>A :Ag<CR>
 nmap <leader>B :Buffers<CR>
 nmap <leader>S :BLines<CR>
 nmap <C-S>     :BLines<CR>
