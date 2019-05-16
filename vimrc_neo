@@ -7,7 +7,7 @@ call plug#begin('~/.local/share/vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " Plug 'majutsushi/tagbar'
-Plug 'scrooloose/nerdtree'
+" Plug 'scrooloose/nerdtree'
 Plug 'Valloric/YouCompleteMe'
 Plug 'dracula/vim'
 Plug 'vim-airline/vim-airline'
@@ -46,6 +46,7 @@ set cursorline
 set background=dark
 set ignorecase
 set hidden
+set autochdir
 "set tags=./tags
 syntax on
 color molokai
@@ -91,11 +92,11 @@ let g:fzf_action = {
 
 " Default fzf layout
 " - down / up / left / right
-" let g:fzf_layout = { 'down': '~40%' }
+let g:fzf_layout = { 'down': '~40%' }
 
 " In Neovim, you can set up fzf window using a Vim command
 " let g:fzf_layout = { 'window': 'enew' }
-let g:fzf_layout = { 'window': '-tabnew' }
+" let g:fzf_layout = { 'window': '-tabnew' }
 " let g:fzf_layout = { 'window': '10split enew' }
 
 " Customize fzf colors to match your color scheme
@@ -116,14 +117,46 @@ let g:fzf_colors =
 " [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 2
 
+" Command for git grep
+" - fzf#vim#grep(command, with_column, [options], [fullscreen])
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep(
+  \   'git grep --line-number '.shellescape(<q-args>), 0,
+  \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
+
+" Augmenting Ag command using fzf#vim#with_preview function
+"   * fzf#vim#with_preview([[options], [preview window], [toggle keys...]])
+"     * For syntax-highlighting, Ruby and any of the following tools are required:
+"       - Bat: https://github.com/sharkdp/bat
+"       - Highlight: http://www.andre-simon.de/doku/highlight/en/highlight.php
+"       - CodeRay: http://coderay.rubychan.de/
+"       - Rouge: https://github.com/jneen/rouge
+"
+"   :Ag  - Start fzf with hidden preview window that can be enabled with "?" key
+"   :Ag! - Start fzf in fullscreen and display the preview window above
+command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>,
+  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \                 <bang>0)
+
+" Likewise, Files command with preview window
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+" command! -bang -nargs=+ -complete=dir Ag call fzf#vim#ag_raw(<q-args>, <bang>0)
+
 " key map
 nmap <leader>H :History<CR>
 nmap <leader>G :GFiles<CR>
-nmap <leader>F :FZF<CR>
-nmap <leader>f :FZF %:p:h<CR>
+nmap <leader>g :GGrep<CR>
+nmap <leader>c :GGrep <C-R>=expand("<cword>")<CR><CR>
+" nmap <leader>F :FZF<CR>
+nmap <leader>F :Files<CR>
+" nmap <leader>f :FZF %:p:h<CR>
+nmap <leader>f :Files %:p:h<CR>
 nmap <leader>A :Ag<SPACE>
 nmap <leader>B :Buffers<CR>
-nmap <leader>E :Ex<CR>
 nmap <leader>S :BLines<CR>
 nmap <C-S>     :BLines<CR>
 nmap <leader>W :Windows<CR>
