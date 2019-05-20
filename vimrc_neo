@@ -30,6 +30,8 @@ Plug 'godlygeek/tabular'
 Plug 'udalov/kotlin-vim'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 " Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'vim-syntastic/syntastic'
 call plug#end()
 
 " =================== Basic configuration ====================
@@ -208,3 +210,19 @@ autocmd BufWritePre * :%s/\s\+$//e
 " ===== air-line =====
 let g:airline#extensions#vimagit#enabled = 1
 
+" ==== cpp-enhanced-highlight ====
+" let g:cpp_class_scope_highlight = 1
+" let g:cpp_member_variable_highlight = 1
+" let g:cpp_class_decl_highlight = 1
+
+" ==== StripWhitespace ====
+let g:strip_whitespace_on_save = 1
+
+" ==== syntastic ====
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0

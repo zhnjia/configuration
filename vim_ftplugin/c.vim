@@ -4,4 +4,4 @@ set colorcolumn=80
 
 set cinoptions=e-0
 set softtabstop=4
-
+let g:cpp_highlight_functions = 1
