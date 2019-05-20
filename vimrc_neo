@@ -12,24 +12,24 @@ Plug 'Valloric/YouCompleteMe'
 Plug 'dracula/vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'jreybert/vimagit'
 Plug 'tpope/vim-fugitive'
-Plug 'jreybert/vimagit'
+" Plug 'jreybert/vimagit'
 Plug 'tpope/vim-surround'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
-Plug 'liuchengxu/space-vim-dark'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tomasr/molokai'
-"Plug 'altercation/vim-colors-solarized'
-Plug 'lifepillar/vim-solarized8'
+Plug 'altercation/vim-colors-solarized'
+"Plug 'lifepillar/vim-solarized8'
 Plug 'tpope/vim-vividchalk'
 Plug 'vim-scripts/a.vim'
+Plug 'godlygeek/tabular'
 " Plug 'xolox/vim-misc'
 " Plug 'xolox/vim-easytags'
 Plug 'udalov/kotlin-vim'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
+" Plug 'octol/vim-cpp-enhanced-highlight'
 call plug#end()
 
 " =================== Basic configuration ====================
@@ -50,7 +50,12 @@ set hidden
 set autochdir
 "set tags=./tags
 syntax on
-color molokai
+
+" ==== Solarized8 theme ====
+" color solarized8
+" let g:solarized_extra_hi_groups = 1
+let g:solarized_termcolors=256
+colorscheme solarized
 
 " GUI Options
 set guioptions-=T
@@ -202,3 +207,4 @@ autocmd BufWritePre * :%s/\s\+$//e
 
 " ===== air-line =====
 let g:airline#extensions#vimagit#enabled = 1
+
