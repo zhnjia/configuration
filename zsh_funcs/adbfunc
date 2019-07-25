@@ -61,7 +61,7 @@ adbfunc () {
                 return
                 ;;
             --)
-                adb logcat -v time
+                adb logcat
                 return
                 ;;
         esac

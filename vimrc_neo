@@ -6,32 +6,26 @@
 call plug#begin('~/.local/share/vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-" Plug 'majutsushi/tagbar'
-" Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 Plug 'Valloric/YouCompleteMe'
-Plug 'dracula/vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
-" Plug 'jreybert/vimagit'
 Plug 'tpope/vim-surround'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
 Plug 'scrooloose/nerdcommenter'
-Plug 'tomasr/molokai'
+" Plug 'tomasr/molokai' "theme
 Plug 'altercation/vim-colors-solarized'
-"Plug 'lifepillar/vim-solarized8'
-Plug 'tpope/vim-vividchalk'
 Plug 'vim-scripts/a.vim'
 Plug 'godlygeek/tabular'
-" Plug 'xolox/vim-misc'
-" Plug 'xolox/vim-easytags'
 Plug 'udalov/kotlin-vim'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 " Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'vim-syntastic/syntastic'
+" Plug 'vim-syntastic/syntastic'
+Plug 'sheerun/vim-polyglot'
 call plug#end()
 
 " =================== Basic configuration ====================
@@ -49,7 +43,7 @@ set cursorline
 set background=dark
 set ignorecase
 set hidden
-set autochdir
+" set autochdir
 "set tags=./tags
 syntax on
 
@@ -157,10 +151,17 @@ command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 " command! -bang -nargs=+ -complete=dir Ag call fzf#vim#ag_raw(<q-args>, <bang>0)
+" Similarly, we can apply it to fzf#vim#grep. To use ripgrep instead of ag:
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
 
-command! -nargs=* -complete=dir Cd call fzf#run(fzf#wrap(
-  \ {'source': 'find '.(empty(<f-args>) ? '.' : <f-args>).' -type d',
-  \  'sink': 'cd'}))
+" Likewise, Files command with preview window
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 " key map
 nmap <leader>H :History<CR>
@@ -172,16 +173,20 @@ nmap <leader>F :Files<CR>
 " nmap <leader>f :FZF %:p:h<CR>
 nmap <leader>f :Files %:p:h<CR>
 nmap <leader>A :Ag<CR>
+nmap <leader>R :Rg<CR>
 nmap <leader>B :Buffers<CR>
 nmap <leader>S :BLines<CR>
 nmap <C-S>     :BLines<CR>
 nmap <leader>W :Windows<CR>
-nmap <F3>      :Ag <C-R>=expand("<cword>")<CR><CR>
+nmap <F3>      :Rg <C-R>=expand("<cword>")<CR><CR>
 nmap <C-x>g    :Gstatus<CR>
 nmap <leader>T :BTags<CR>
+nmap <leader>C :Commands<CR>
 
 " ultisnips
-let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " ===== Tagbar =====
 " nmap <leader>T :TagbarOpenAutoClose<CR>
@@ -219,10 +224,13 @@ let g:airline#extensions#vimagit#enabled = 1
 let g:strip_whitespace_on_save = 1
 
 " ==== syntastic ====
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+
+" ==== java highlight ====
+let java_highlight_functions="style"
