@@ -223,6 +223,7 @@ autocmd BufWritePre * :%s/\s\+$//e
 
 " ===== air-line =====
 let g:airline#extensions#vimagit#enabled = 1
+let g:airline_theme='base16_spacemacs'
 
 " ==== cpp-enhanced-highlight ====
 " let g:cpp_class_scope_highlight = 1
