@@ -5,7 +5,7 @@ f () {
     find . -name $@ | tee $res
     local lines=$(cat $res | wc -l)
     if [ $lines -eq 1 ];then
-        echo -n "  [Only one! \"e\"-> vi, \"q\"-> quit, \"d\"-> del] : "
+        echo -n "  [Only one! \"e\"-> vi, \"q\"-> quit, \"d\"-> del, \"i\"-> \"adb install\"] : "
         read -k 1 cmd
         echo ""
         case $cmd in
@@ -17,6 +17,9 @@ f () {
                 ;;
             "d")
                 rm $(cat $res)
+                ;;
+            "i")
+                adb install $(cat $res)
                 ;;
         esac
     fi
