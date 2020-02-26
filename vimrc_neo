@@ -10,8 +10,8 @@ Plug 'junegunn/fzf.vim'
 " Plug 'scrooloose/nerdtree'
 " Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'Valloric/YouCompleteMe'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'SirVer/ultisnips'
@@ -19,7 +19,9 @@ Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
 Plug 'scrooloose/nerdcommenter'
 " Plug 'tomasr/molokai' "theme
-Plug 'altercation/vim-colors-solarized'
+Plug 'joshdick/onedark.vim'
+Plug 'itchyny/lightline.vim'
+" Plug 'altercation/vim-colors-solarized'
 Plug 'vim-scripts/a.vim'
 Plug 'godlygeek/tabular'
 Plug 'udalov/kotlin-vim'
@@ -29,7 +31,7 @@ Plug 'ntpeters/vim-better-whitespace'
 " Plug 'vim-syntastic/syntastic'
 Plug 'Shougo/denite.nvim'
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'liuchengxu/space-vim-dark'
+" Plug 'liuchengxu/space-vim-dark'
 call plug#end()
 
 " =================== Basic configuration ====================
@@ -51,16 +53,23 @@ set hidden
 "set tags=./tags
 syntax on
 
-" ==== Solarized8 theme ====
-" color solarized8
-" let g:solarized_extra_hi_groups = 1
-"let g:solarized_termcolors=256
-"colorscheme solarized
+" ==== theme ====
 if (has("termguicolors"))
     set termguicolors
 endif
-"colorscheme spacemacs-theme
-colorscheme space-vim-dark
+colorscheme onedark
+let g:lightline = {
+            \ 'colorscheme': 'onedark',
+            \ 'active': {
+            \   'left': [ [ 'mode', 'paste' ],
+            \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+            \ },
+            \ 'component_function': {
+            \   'gitbranch': 'FugitiveHead'
+            \ },
+            \ }
+let g:onedark_termcolors=256
+let g:onedark_terminal_italics=1
 
 " GUI Options
 set guioptions-=T
@@ -222,8 +231,8 @@ autocmd BufWritePre * :%s/\s\+$//e
 " let g:python3_host_prog='/usr/bin/python3'
 
 " ===== air-line =====
-let g:airline#extensions#vimagit#enabled = 1
-let g:airline_theme='base16_spacemacs'
+" let g:airline#extensions#vimagit#enabled = 1
+" let g:airline_theme='monokai_tasty'
 
 " ==== cpp-enhanced-highlight ====
 " let g:cpp_class_scope_highlight = 1

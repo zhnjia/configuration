@@ -69,7 +69,7 @@ fpath=( ~/.zsh_funcs $fpath )
 autoload f vl ws tb
 
 # PATH
-export PATH=$PATH:/home/jiazhang/Workspace/repo/depot_tools
+export PATH=$PATH:/home/jiazhang/Workspace/repo/depot_tool
 
 # Customize to your needs...
 export CONFIG_PATH=$PATH:/home/jiazhang/bin:/usr/local/bin:/usr/bin:/bin:/usr/games

@@ -5,22 +5,15 @@ f () {
     find . -name $@ | tee $res
     local lines=$(cat $res | wc -l)
     if [ $lines -eq 1 ];then
-        echo -n "  [Only one! \"e\"-> vi, \"q\"-> quit, \"d\"-> del, \"i\"-> \"adb install\"] : "
+        echo -n "  [Only one! \"q\"-> quit, \"x\"-> \"export to \$LFR\"] : "
         read -k 1 cmd
         echo ""
         case $cmd in
             "q")
                 return
                 ;;
-            "e")
-                vi $(cat $res)
-                ;;
-            "d")
-                rm $(cat $res)
-                ;;
-            "i")
-                adb install $(cat $res)
-                ;;
+            "x")
+                export LFR=$(cat $res)
         esac
     fi
 }
