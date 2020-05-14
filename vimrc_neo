@@ -29,8 +29,12 @@ Plug 'jeffkreeftmeijer/vim-numbertoggle'
 " Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'ntpeters/vim-better-whitespace'
 " Plug 'vim-syntastic/syntastic'
+Plug 'tpope/vim-vinegar'
 Plug 'Shougo/denite.nvim'
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-easytags'
 " Plug 'liuchengxu/space-vim-dark'
 call plug#end()
 
@@ -257,4 +261,13 @@ let g:strip_whitespace_on_save = 1
 " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " let g:NERDTreeChDirMode = 2
 
+" ==== netrw ====
+let g:netrw_liststyle = 3
+let g:netrw_banner = 0
+let g:netrw_browse_split = 3
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
+
+" java
+autocmd filetype java UpdateTags
 
