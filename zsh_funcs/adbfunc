@@ -26,7 +26,8 @@ usedevice () {
   fi
 
   export ANDROID_SERIAL=$serial
-  echo "  !!! Directs command to [$fg_bold[red]"$(echo $models | awk -v dev=$SEL '{if (NR == dev) {print $1}}')"$reset_color] !!!"
+  export LINKED_ANDROID_DEVICE="$(echo $models | awk -v dev=$SEL '{if (NR == dev) {print $1}}')"
+  echo "  !!! Directs command to [$fg_bold[red]"$LINKED_ANDROID_DEVICE"$reset_color] !!!"
 }
 
 adbfunc () {
