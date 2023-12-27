@@ -6,15 +6,15 @@
 call plug#begin('~/.local/share/vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-" Plug 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'
 " Plug 'scrooloose/nerdtree'
 " Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'Valloric/YouCompleteMe'
+" Plug 'Valloric/YouCompleteMe'
 " Plug 'vim-airline/vim-airline'
 " Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
 Plug 'scrooloose/nerdcommenter'
@@ -30,12 +30,22 @@ Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'ntpeters/vim-better-whitespace'
 " Plug 'vim-syntastic/syntastic'
 Plug 'tpope/vim-vinegar'
-Plug 'Shougo/denite.nvim'
-Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'Shougo/denite.nvim'
+" Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'kristijanhusak/defx-icons'
 Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-easytags'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'terryma/vim-expand-region'
+" google
+Plug 'google/vim-maktaba'
+Plug 'google/vim-codefmt'
+Plug 'google/vim-glaive'
 " Plug 'liuchengxu/space-vim-dark'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'jamespwilliams/bat.vim'
+Plug 'rust-lang/rust.vim'
+Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 " =================== Basic configuration ====================
@@ -53,20 +63,23 @@ set cursorline
 set background=dark
 set ignorecase
 set hidden
+set mouse=a
+set guicursor=
 " set autochdir
 "set tags=./tags
 syntax on
 
 " ==== theme ====
-if (has("termguicolors"))
-    set termguicolors
-endif
+"if (has("termguicolors"))
+set termguicolors
+"endif
+"colorscheme onedark
 colorscheme onedark
 let g:lightline = {
             \ 'colorscheme': 'onedark',
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
-            \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+            \             [ 'gitbranch', 'readonly', 'relativepath', 'modified' ] ]
             \ },
             \ 'component_function': {
             \   'gitbranch': 'FugitiveHead'
@@ -120,7 +133,7 @@ let g:fzf_action = {
 
 " Default fzf layout
 " - down / up / left / right
-let g:fzf_layout = { 'down': '~40%' }
+let g:fzf_layout = { 'down': '~30%' }
 
 " In Neovim, you can set up fzf window using a Vim command
 " let g:fzf_layout = { 'window': 'enew' }
@@ -162,15 +175,15 @@ command! -bang -nargs=* GGrep
 "
 "   :Ag  - Start fzf with hidden preview window that can be enabled with "?" key
 "   :Ag! - Start fzf in fullscreen and display the preview window above
-command! -bang -nargs=* Rg
-  \ call fzf#vim#rg(<q-args>,
-  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
-  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \                 <bang>0)
+" command! -bang -nargs=* Rg
+  " \ call fzf#vim#rg(<q-args>,
+  " \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+  " \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+  " \                 <bang>0)
 
 " Likewise, Files command with preview window
 command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+            \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 " command! -bang -nargs=+ -complete=dir Ag call fzf#vim#ag_raw(<q-args>, <bang>0)
 " Similarly, we can apply it to fzf#vim#grep. To use ripgrep instead of ag:
@@ -180,10 +193,6 @@ command! -bang -nargs=* Rg
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
-
-" Likewise, Files command with preview window
-command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 " key map
 nmap <leader>H :History<CR>
@@ -205,14 +214,17 @@ nmap <C-x>g    :Gstatus<CR>
 nmap <leader>T :BTags<CR>
 nmap <leader>C :Commands<CR>
 
+
 " ultisnips
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+"let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " ===== Tagbar =====
-" nmap <leader>T :TagbarOpenAutoClose<CR>
-" let g:tagbar_vertical = 20
+nmap <F8> :TagbarToggle<CR>
+let g:tagbar_position = 'leftabove vertical'
+let g:tagbar_ctags_bin = "/usr/local/bin/ctags"
+"autocmd FileType python,c,cpp,java,st TagbarOpen
 
 " ===== NERDComment =====
 " Add spaces after comment delimiters by default
@@ -229,7 +241,7 @@ let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 
 " ===== auto trim empty space line =====
-autocmd BufWritePre * :%s/\s\+$//e
+"autocmd BufWritePre * :%s/\s\+$//e
 
 " let g:python_host_prog='/usr/bin/python'
 " let g:python3_host_prog='/usr/bin/python3'
@@ -269,5 +281,118 @@ let g:netrw_altv = 1
 let g:netrw_winsize = 25
 
 " java
-autocmd filetype java UpdateTags
+" autocmd filetype java UpdateTags Defx
+" call defx#custom#option('_', {
+"       \ 'winwidth': 30,
+"       \ 'split': 'vertical',
+"       \ 'direction': 'topleft',
+"       \ 'show_ignored_files': 0,
+"       \ 'buffer_name': '',
+"       \ 'toggle': 1,
+"       \ 'resume': 1
+"       \ })
+"
+" autocmd FileType defx call s:defx_my_settings()
+" function! s:defx_my_settings() abort
+"     " Define mappings
+"     nnoremap <silent><buffer><expr> <CR>
+"                 \ defx#do_action('open')
+"     nnoremap <silent><buffer><expr> c
+"                 \ defx#do_action('copy')
+"     nnoremap <silent><buffer><expr> m
+"                 \ defx#do_action('move')
+"     nnoremap <silent><buffer><expr> p
+"                 \ defx#do_action('paste')
+"     nnoremap <silent><buffer><expr> l
+"                 \ defx#do_action('open')
+"     nnoremap <silent><buffer><expr> E
+"                 \ defx#do_action('open', 'vsplit')
+"     nnoremap <silent><buffer><expr> P
+"                 \ defx#do_action('preview')
+"     nnoremap <silent><buffer><expr> o
+"                 \ defx#do_action('open_tree', 'toggle')
+"     nnoremap <silent><buffer><expr> K
+"                 \ defx#do_action('new_directory')
+"     nnoremap <silent><buffer><expr> N
+"                 \ defx#do_action('new_file')
+"     nnoremap <silent><buffer><expr> M
+"                 \ defx#do_action('new_multiple_files')
+"     nnoremap <silent><buffer><expr> C
+"                 \ defx#do_action('toggle_columns',
+"                 \                'mark:indent:icon:filename:type:size:time')
+"     nnoremap <silent><buffer><expr> S
+"                 \ defx#do_action('toggle_sort', 'time')
+"     nnoremap <silent><buffer><expr> d
+"                 \ defx#do_action('remove')
+"     nnoremap <silent><buffer><expr> r
+"                 \ defx#do_action('rename')
+"     nnoremap <silent><buffer><expr> !
+"                 \ defx#do_action('execute_command')
+"     nnoremap <silent><buffer><expr> x
+"                 \ defx#do_action('execute_system')
+"     nnoremap <silent><buffer><expr> yy
+"                 \ defx#do_action('yank_path')
+"     nnoremap <silent><buffer><expr> .
+"                 \ defx#do_action('toggle_ignored_files')
+"     nnoremap <silent><buffer><expr> ;
+"                 \ defx#do_action('repeat')
+"     nnoremap <silent><buffer><expr> h
+"                 \ defx#do_action('cd', ['..'])
+"     nnoremap <silent><buffer><expr> ~
+"                 \ defx#do_action('cd')
+"     nnoremap <silent><buffer><expr> q
+"                 \ defx#do_action('quit')
+"     nnoremap <silent><buffer><expr> <Space>
+"                 \ defx#do_action('toggle_select') . 'j'
+"     nnoremap <silent><buffer><expr> *
+"                 \ defx#do_action('toggle_select_all')
+"     nnoremap <silent><buffer><expr> j
+"                 \ line('.') == line('$') ? 'gg' : 'j'
+"     nnoremap <silent><buffer><expr> k
+"                 \ line('.') == 1 ? 'G' : 'k'
+"     nnoremap <silent><buffer><expr> <C-l>
+"                 \ defx#do_action('redraw')
+"     nnoremap <silent><buffer><expr> <C-g>
+"                 \ defx#do_action('print')
+"     nnoremap <silent><buffer><expr> cd
+"                 \ defx#do_action('change_vim_cwd')
+" endfunction
+"
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
 
+" Rust
+let g:rustfmt_autosave = 1
+
+"""""" coc.nvim """"""
+" Use <cr> to confirm completion
+inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+" use <tab> to trigger completion and navigate to the next complete item
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+
+nnoremap <silent> <leader>h :call CocActionAsync('doHover')<cr>
+nnoremap <nowait><expr> <C-j> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-j>"
+nnoremap <nowait><expr> <C-k> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-k>"
+inoremap <nowait><expr> <C-j> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+inoremap <nowait><expr> <C-k> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+
+""""""" neovide """""""
+if exists("g:neovide")
+    " Put anything you want to happen only in Neovide here
+    set guifont=Hack:h8
+    set linespace=2
+    let g:neovide_hide_mouse_when_typing = v:true
+    let g:neovide_confirm_quit = v:true
+    let g:neovide_remember_window_size = v:true
+    "let g:neovide_fullscreen = v:true
+endif
+
+" autocmd VimLeave * silent !echo -ne "\e[6 q"
